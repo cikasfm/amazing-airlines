@@ -1,0 +1,14 @@
+{
+    "name": "now-boarding",
+    "version": "1.0.0",
+    "description": "Now Boarding",
+    "main": "runner.js",
+    "scripts": {
+        "start": "./run_now_onboarding.sh"
+    },
+    "author": "Byteboard",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "sqlite3": "^5.1.6"
+    }
+}
