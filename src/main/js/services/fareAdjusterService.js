@@ -67,7 +67,13 @@ class FareAdjusterService {
       adjMultiplier = this.highDemand.multiplier;
     }
 
-    // TODO : add historical multiplier
+    /**
+     * TODO : add historical multiplier
+     * In order to add historical data multiplier, we need to know
+     * whether this flight was historically popular
+     * 
+     * That should be pre-calculated and saved as flight metadata in the database.
+     */
 
     // loyalty multiplier
     if ( isLoyaltyMember && flight.points_bonus_multiplier ) {

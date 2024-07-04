@@ -1,3 +1,5 @@
+[![Node.js CI](https://github.com/cikasfm/amazing-airlines/actions/workflows/node.js.yml/badge.svg)](https://github.com/cikasfm/amazing-airlines/actions/workflows/node.js.yml)
+
 # Task List
 
 You may do these tasks in any order, but take note that they are listed in the order your team has prioritized completing them.
