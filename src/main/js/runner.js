@@ -1,7 +1,6 @@
-const {
-  FlightRecommendationService,
-} = require("./services/flightRecommendationService");
+const { FlightRecommendationService } = require("./services/flightRecommendationService");
 const { FareService } = require("./services/fareService");
+const { openDb } = require("./db/dbUtil");
 
 // Sample user preferences
 const GREEN = "\x1b[0;32m";
@@ -18,11 +17,13 @@ const sampleUserPreferences = {
 };
 
 class Runner {
-  constructor() {}
+  constructor() {
+    this.db = openDb();
+  }
 
   async run() {
     // Create a flight recommendation service
-    let frs = new FlightRecommendationService(sampleUserPreferences);
+    let frs = new FlightRecommendationService({ preferences: sampleUserPreferences, db: this.db });
     let recommendedFlights = await frs.getRecommendedFlights();
 
     // Print recommended flights
@@ -47,7 +48,7 @@ class Runner {
 
   async printFareServiceResults(recommendedFlights, bookingClass) {
     console.log("\n=== Fare Service Results ===\n");
-    let fareService = new FareService();
+    let fareService = new FareService({ db: this.db });
     for (let [flight, _] of recommendedFlights) {
       let fare = await fareService.getFare(flight.flight_id, bookingClass);
       console.log(

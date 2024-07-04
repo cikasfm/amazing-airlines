@@ -10,7 +10,7 @@ class FlightRecommendationService {
   loyaltyId;
   recommendedFlights;
 
-  constructor(preferences) {
+  constructor({ preferences, db }) {
     const {
       origin,
       destination,

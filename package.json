@@ -4,11 +4,16 @@
     "description": "Now Boarding",
     "main": "runner.js",
     "scripts": {
-        "start": "./run_now_onboarding.sh"
+        "start": "node src/main/js/runner.js",
+        "test": "mocha src/test/js/**"
     },
     "author": "Byteboard",
     "license": "UNLICENSED",
     "dependencies": {
         "sqlite3": "^5.1.6"
+    },
+    "devDependencies": {
+        "chai": "^5.1.1",
+        "mocha": "^10.6.0"
     }
 }
