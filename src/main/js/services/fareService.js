@@ -23,11 +23,11 @@ class FareService {
 
       // Check if the booking class is valid
       if (!this.fareAdjusterService.isValidClass(bookingClass)) {
-        reject("Invalid booking class");
+        reject(new Error('Invalid booking class'));
       }
 
       if (isNaN(flightId)) { // validate input before using in query
-        reject(`Invalid Argument: flight_id=${flightId} is not a valid number`);
+        reject(new Error(`Invalid Argument: flight_id=${flightId} is not a valid number`));
       }
 
       this.selectFlight.get( [ flightId ], (err, flighResult) => {
