@@ -48,5 +48,12 @@ describe('FareAdjusterService', () => {
         'economy'
       )).to.be.equal(250)
     )
+    it('should return $160 for a loyalty member with points applied', () => expect(service
+      .adjustFare(
+        { base_cost: 200, tickets_sold: 50, capacity: 100, points_bonus_multiplier: 2 },
+        'economy',
+        true // is loyalty member
+      )).to.be.equal(160)
+    )
   })
 })

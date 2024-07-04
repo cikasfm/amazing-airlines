@@ -5,7 +5,7 @@
     "main": "runner.js",
     "scripts": {
         "start": "node src/main/js/runner.js",
-        "test": "mocha src/test/js/**"
+        "test": "nyc mocha src/test/js/**"
     },
     "author": "Byteboard",
     "license": "UNLICENSED",

@@ -68,4 +68,16 @@ describe('FareService', () => {
           expect(err.message).to.contain('Internal Server Error');
         })
     )
+    it('should return an invalid argument error for flight "other"', () => 
+        service.getFare('other', 'economy').catch(err => {
+          expect(err).to.be.an('error');
+          expect(err.message).to.contain('Invalid Argument: flight_id=other is not a valid number');
+        })
+    )
+    it('should return Invalid booking class error for coach', () => service.getFare(200, 'coach')
+        .catch(err => {
+            expect(err).to.be.an('error');
+            expect(err.message).to.contain('Invalid booking class');
+        })
+    )
 })
