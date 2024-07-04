@@ -1,5 +1,38 @@
 # Overall review comments
 
+The service is stateful and can only be used for one specific customer search.
+
+Meaning, every time a customer needs to run a search - a new service will need to be created.
+
+This is suboptimal from memory usage perspective, but also contradicts with standard practice
+- services class implementations should be stateless.
+
+Also, this service is calling `openDb` in `getRecommendedFlights`, which means that new database connection
+will need to be created for every customer call which is already a potential performance issue.
+
+In general - there is not clear separation on which methods are internal and which ones are exposed,
+which may lead to unexpected usage of the method calls and thus making code changes in future more
+complicated. I would add clear separation, which functions are meant to be internal, and which ones - external.
+
+Potentially even move them out ( like, `buildFilteredQuery` ) to a separate class to reduce confusion.
 
 # Line-specific comments
 # Example: [101 - 103] This code could be improved by...
+
+[2] Add constructor parameter description
+
+[3-33] Remove user preferences from constructor, and move as argument to `getRecommendedFlights`.
+Instead, intiate a database connection by calling `openDb` and saving that connection in the service scope.
+
+[41] Add user preferences as argument to `getRecommendedFlights`
+
+[44] Use `numResults` to build the query and filter query result size at the DB level,
+instead of service level. This could be a major performance issue filtering on the client side,
+when the service is getting ALL database results, but only showing the first 15.
+Also, there seems to be no way of getting the next page.
+
+[48] Handle errors and return a client-friendly error message, instead of internal database message
+
+[78-100, 117] Use DB query templates to avoid SQL-injection
+
+[108] `scoreHistoricalPopularity` should return or modify `recommendedFlights` argument, not `this.recommendedFlights`
