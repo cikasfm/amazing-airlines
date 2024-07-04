@@ -1,2 +1,8 @@
+# dependencies
 node_modules/
+
+# code coverage
+.nyc_output/
+
+# larga database
 airline_reservations_data.db
